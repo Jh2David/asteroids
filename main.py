@@ -1,7 +1,7 @@
 import pygame
 
-from constants import *
 from circleshape import CircleShape
+from constants import *
 from player import Player
 
 
@@ -11,7 +11,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     circle = CircleShape(x=100, y=100, radius=30)
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 )
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while True:
         for event in pygame.event.get():
@@ -19,11 +19,19 @@ def main():
                 return
             clock.tick(60)
 
+        # Update
         circle.update(dt)
+        player.update(dt)
+
+        # Draw
         screen.fill((0, 0, 0))
         circle.draw(screen)
         player.draw(screen)
+
+        # Refresh
         pygame.display.flip()
+
+        # FPS
         dt = clock.tick(60) / 1000
 
 
