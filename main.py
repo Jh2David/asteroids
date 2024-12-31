@@ -7,6 +7,13 @@ from player import Player
 
 def main():
     pygame.init()
+
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
@@ -20,13 +27,13 @@ def main():
             clock.tick(60)
 
         # Update
-        circle.update(dt)
-        player.update(dt)
+        for thing in updatable:
+            thing.update(dt)
 
         # Draw
         screen.fill((0, 0, 0))
-        circle.draw(screen)
-        player.draw(screen)
+        for thing in drawable:
+            thing.draw(screen)
 
         # Refresh
         pygame.display.flip()
